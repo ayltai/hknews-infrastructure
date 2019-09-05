@@ -1,0 +1,6 @@
+---
+- cron:
+  name: cron
+  minute: "0"
+  hour: "*/12"
+  job: certbot renew --quiet >/dev/null 2>&1

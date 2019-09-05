@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Alan Tai
+  description: Install PM2
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+  galaxy_tags:
+    - pm2
+    - process
+dependencies:
+  - role: initialize

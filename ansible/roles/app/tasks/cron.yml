@@ -1,0 +1,6 @@
+---
+- name: Add a cron job to run application on system reboot
+  cron:
+    name: hknews
+    special_time: reboot
+    job: "{{ project_path }}/start.sh"

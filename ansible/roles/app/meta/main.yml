@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Alan Tai
+  description: Checkout and configure HK News application server
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+  galaxy_tags:
+    - hknews
+    - checkout
+dependencies:
+  - role: initialize
+  - role: git
+  - role: java
+  - role: mongodb
+  - role: pm2

@@ -1,0 +1,26 @@
+---
+- name: Add Grafana repository key
+  become: true
+  apt_key:
+    keyserver: "{{ grafana_key_server }}"
+    id: "{{ grafana_key }}"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Add Grafana repository
+  become: true
+  apt_repository:
+    repo: "{{ grafana_repo }}"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Install Grafana
+  become: true
+  apt:
+    name: grafana
+    update_cache: true
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'

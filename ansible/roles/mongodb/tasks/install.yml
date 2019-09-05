@@ -1,0 +1,28 @@
+---
+- name: Add MongoDB repository key
+  become: true
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: "{{ mongodb_key }}"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Add MongoDB repository
+  become: true
+  apt_repository:
+    repo: "{{ mongodb_repo }}"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Install MongoDB packages
+  become: true
+  apt:
+    name: mongodb-org
+    update_cache: true
+  notify:
+    - Restart MongoDB service
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'

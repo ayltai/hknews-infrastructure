@@ -1,0 +1,75 @@
+version: 2
+
+references:
+
+  ## Docker image configuration
+
+  config: &config
+    working_directory: ~/workspace
+    docker:
+      - image: ayltai/hknews-infrastructure:latest
+    environment:
+      TERM: dumb
+
+jobs:
+
+  check:
+    <<: *config
+    steps:
+      - checkout
+      - run:
+        name: Check if Terraform scripts are formatted
+        command: terraform fmt -check -write=false
+        working_directory: terraform
+      - run:
+        name: Validate the syntax of Terraform scripts
+        command: terraform validate -no-color
+        working_directory: terraform
+      - run:
+        name: Lint Ansible scripts
+        command: ansible-lint ./playbook.yml
+        working_directory: ansible
+
+  deploy:
+    <<: *config
+    steps:
+      - checkout
+      - run:
+        name: Configure credentials for accessing Terraform Cloud backend
+        command: echo $TERRAFORM_TOKEN | base64 -di > ~/.terraformrc
+      - run:
+        name: Configure SSH public key for accessing the system to be provisioned
+        command: echo $SSH_PUBLIC_KEY | base64 -di > ~/.ssh/hknews.pub
+      - run:
+        name: Configure SSH private key for accessing the system to be provisioned
+        command: echo $SSH_PRIVATE_KEY | base64 -di > ~/.ssh/hknews.pem
+      - run:
+        name: Initialize Terraform backend and plugins
+        command: terraform init
+        working_directory: terraform
+      - run:
+        name: Select Terraform Cloud workspace
+        command: terraform workspace select main
+        working_directory: terraform
+      - run:
+        name: Plan for the changes
+        command: terraform plan -out main
+        working_directory: terraform
+      - run:
+        name: Apply the changes
+        command: terraform apply main
+        working_directory: terraform
+        no_output_timeout: 40m
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - check
+      - deploy:
+        requires:
+          - check
+        filters:
+          branches:
+            only:
+              - master

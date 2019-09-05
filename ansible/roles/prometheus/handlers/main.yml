@@ -1,0 +1,14 @@
+---
+- name: Restart Prometheus
+  become: true
+  service:
+    name: prometheus
+    state: restarted
+  when: service_default_state | default('started') == 'started'
+
+- name: Restart Prometheus MongoDB Exporter
+  become: true
+  service:
+    name: prometheus-mongodb-exporter
+    state: restarted
+  when: service_default_state | default('started') == 'started'

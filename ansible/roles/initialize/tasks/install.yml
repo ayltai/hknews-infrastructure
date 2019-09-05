@@ -1,0 +1,8 @@
+---
+- name: Install prerequisites
+  become: true
+  apt:
+    name: software-properties-common
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'

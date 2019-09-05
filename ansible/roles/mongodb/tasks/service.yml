@@ -1,0 +1,7 @@
+---
+- name: Create MongoDB service
+  become: true
+  service:
+    name: mongod
+    state: started
+    enabled: yes

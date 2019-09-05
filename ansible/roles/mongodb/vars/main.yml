@@ -1,0 +1,3 @@
+---
+mongodb_key: 4B7C549A058F8B6B
+mongodb_repo: "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse"

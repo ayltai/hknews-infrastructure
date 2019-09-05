@@ -1,0 +1,54 @@
+---
+- name: Wait 30 minutes for DNS to resolve {{ domain_name }}
+  wait_for:
+    timeout: 1800
+    host: "{{ domain_name }}"
+    port: 22
+    delay: 10
+    search_regex: OpenSSH
+
+- name: Generate SSL certificate
+  become: true
+  command: |
+    certbot certonly \
+    --noninteractive \
+    --agree-tos \
+    --standalone \
+    --preferred-challenges http-01 \
+    --rsa-key-size 4096 \
+    --renew-by-default \
+    --email {{ email }} \
+    -d {{ domain_name }} \
+    -d www.{{ domain_name }}
+  args:
+    creates: "/etc/letsencrypt/live/{{ domain_name }}"
+
+- name: Generate P12 certificate
+  become: true
+  command: |
+    openssl pkcs12 \
+    -export \
+    -in /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem \
+    -inkey /etc/letsencrypt/live/{{ domain_name }}/privkey.pem \
+    -out {{ project_path }}/keystore.p12 \
+    -name keystore
+  args:
+    creates: "{{ project_path }}/keystore.p12"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Gererate JKS certificate
+  become: true
+  command: |
+    keytool \
+    -importkeystore \
+    -deststorepass {{ ssl_key }} \
+    -destkeypass {{ ssl_key }} \
+    -destkeystore {{ project_path }}/keystore.jks \
+    -srckeystore {{ project_path }}/keystore.p12 \
+    -srcstoretype PKCS12 \
+    -srcstorepass {{ ssl_key }} \
+    -alias keystore
+  args:
+    creates: "{{ project_path }}/keystore.jks"

@@ -1,0 +1,32 @@
+---
+- name: setup
+  hosts: hknews
+  become: true
+  tasks:
+    - include_role:
+        name: initialize
+    - include_role:
+        name: git
+    - include_role:
+        name: java
+    - include_role:
+        name: mongodb
+    - include_role:
+        name: pm2
+    - include_role:
+        name: fail2ban
+    - include_role:
+        name: prometheus
+    - include_role:
+        name: grafana
+    - include_role:
+        name: app
+    - include_role:
+        name: letsencrypt
+    - include_role:
+        name: cleanup
+  vars:
+    domain_name: hknews.dev
+    project_path: /home/ubuntu/projects/hknews-backend
+    project_repo: https://github.com/ayltai/hknews-backend.git
+    email: ayltai@gmail.com

@@ -1,0 +1,7 @@
+---
+- name: Build application
+  become: true
+  command: "{{ project_path }}/build.sh"
+  args:
+    chdir: "{{ project_path }}"
+    creates: "{{ project_path }}/build/libs/hknews-backend-1.0.0.jar"

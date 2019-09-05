@@ -1,0 +1,33 @@
+---
+- name: Copy SSL certificate
+  become: true
+  copy:
+    src: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
+    dest: "{{ project_path }}/keystore.pem"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Copy private key file
+  become: true
+  copy:
+    src: "/etc/letsencrypt/live/{{ domain_name }}/privkey.pem"
+    dest: "{{ project_path }}/private.key"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Export SSL key password environment variable
+  become: true
+  lineinfile:
+    path: /etc/environment
+    line: "SSL_KEY={{ ssl_key }}"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'

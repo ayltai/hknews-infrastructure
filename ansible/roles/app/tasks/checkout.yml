@@ -1,0 +1,7 @@
+---
+- name: Checkout application repository
+  become: true
+  git:
+    repo: "{{ project_repo }}"
+    dest: "{{ project_path }}"
+    version: master

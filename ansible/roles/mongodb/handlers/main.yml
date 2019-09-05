@@ -1,0 +1,7 @@
+---
+- name: Restart MongoDB service
+  become: true
+  service:
+    name: mongod
+    state: restarted
+  when: service_default_state | default('started') == 'started'

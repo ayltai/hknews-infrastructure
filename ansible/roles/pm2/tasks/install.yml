@@ -1,0 +1,14 @@
+---
+- name: Install NPM
+  become: true
+  apt:
+    name: npm
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Install PM2
+  become: true
+  npm:
+    name: pm2
+    global: yes
