@@ -18,12 +18,12 @@ resource "aws_instance" "hknews" {
     inline = [
       "sudo apt -qq install python -y",
     ]
-  }
 
-  connection {
-    type        = "ssh"
-    private_key = "${file(var.private_key)}"
-    user        = "${var.user}"
+    connection {
+      host        = "${aws_instance.hknews.public_ip}"
+      private_key = "${file(var.private_key)}"
+      user        = "${var.user}"
+    }
   }
 
   provisioner "local-exec" {
