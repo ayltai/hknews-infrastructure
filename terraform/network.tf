@@ -9,7 +9,7 @@ resource "aws_vpc" "hknews" {
 }
 
 resource "aws_eip" "hknews" {
-  instance = "${aws_instance.hknews.id}"
+  instance = "${aws_instance.hknews.0.id}"
   vpc      = true
 
   tags = {
