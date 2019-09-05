@@ -20,7 +20,7 @@ resource "aws_instance" "hknews" {
     ]
 
     connection {
-      host        = "${aws_instance.hknews.public_ip}"
+      host        = "${aws_instance.hknews.0.public_ip}"
       private_key = "${file(var.private_key)}"
       user        = "${var.user}"
     }
@@ -31,7 +31,7 @@ resource "aws_instance" "hknews" {
       sleep 50;
       >inventory.ini;
       echo "[hknews]" | tee -a inventory.ini;
-      echo "${aws_instance.hknews.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a inventory.ini;
+      echo "${aws_instance.hknews.0.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a inventory.ini;
       export ANSIBLE_HOST_KEY_CHECKING=False;
       ansible-playbook -u ${var.user} --private-key ${var.private_key} -i inventory.ini ../ansible/playbook.yml
     EOT
