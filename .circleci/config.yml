@@ -34,6 +34,9 @@ jobs:
           name: Configure credentials for accessing Terraform Cloud backend
           command: echo $TERRAFORM_TOKEN | base64 -di > ~/.terraformrc
       - run:
+          name: Create .ssh directory to store SSH keys
+          command: mkdir ~/.ssh
+      - run:
           name: Configure SSH public key for accessing the system to be provisioned
           command: echo $SSH_PUBLIC_KEY | base64 -di > ~/.ssh/hknews.pub
       - run:
