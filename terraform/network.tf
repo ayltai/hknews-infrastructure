@@ -3,7 +3,7 @@ resource "aws_vpc" "hknews" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags {
+  tags = {
     Name = "${var.tag}"
   }
 }
@@ -12,7 +12,7 @@ resource "aws_eip" "hknews" {
   instance = "${aws_instance.hknews.id}"
   vpc      = true
 
-  tags {
+  tags = {
     Name = "${var.tag}"
   }
 }

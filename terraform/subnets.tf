@@ -3,7 +3,7 @@ resource "aws_subnet" "hknews" {
   availability_zone = "${var.zone}"
   cidr_block        = "${var.subnet_cidr_block}"
 
-  tags {
+  tags = {
     Name = "${var.tag}"
   }
 }
@@ -16,7 +16,7 @@ resource "aws_route_table" "hknews" {
     gateway_id = "${aws_internet_gateway.hknews.id}"
   }
 
-  tags {
+  tags = {
     Name = "${var.tag}"
   }
 }

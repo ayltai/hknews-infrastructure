@@ -37,7 +37,7 @@ resource "aws_instance" "hknews" {
     EOT
   }
 
-  tags {
+  tags = {
     Name = "${var.tag}"
   }
 }

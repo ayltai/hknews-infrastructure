@@ -3,7 +3,7 @@ resource "aws_security_group" "hknews" {
   description = "HK News security group"
   vpc_id      = "${aws_vpc.hknews.id}"
 
-  tags {
+  tags = {
     Name = "${var.tag}"
   }
 
