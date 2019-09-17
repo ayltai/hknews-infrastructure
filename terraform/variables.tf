@@ -45,7 +45,7 @@ variable "instance_count" {
 
 variable "storage_size" {
   description = "The size of the storage attached to EC2 instances"
-  default     = 20
+  default     = 10
 }
 
 variable "ami_key_name" {
