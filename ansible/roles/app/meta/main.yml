@@ -15,4 +15,5 @@ dependencies:
   - role: git
   - role: java
   - role: mongodb
+  - role: node
   - role: pm2

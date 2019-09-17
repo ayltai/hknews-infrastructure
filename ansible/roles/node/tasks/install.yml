@@ -1,0 +1,27 @@
+---
+- name: Make sure apt-transport-https is installed
+  become: true
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - curl
+      - apt-transport-https
+      - lsb-release
+      - ca-certificates
+    when:
+      - ansible_distribution == 'Ubuntu'
+      - ansible_distribution_version == '18.04'
+
+- name: Add NodeSource repository
+  become: true
+  command: "curl -sL https://deb.nodesource.com/setup_{{ nodejs_version }}.x | sudo -E bash -"
+
+- name: Install NodeJS
+  become: true
+  apt:
+    name: nodejs
+    update_cache: true
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'

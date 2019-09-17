@@ -1,7 +1,32 @@
 ---
-- name: Build application
+- name: Install frontend dependencies
   become: true
-  command: "{{ project_path }}/build.sh"
+  command: "npm i --production"
   args:
-    chdir: "{{ project_path }}"
-    creates: "{{ project_path }}/build/libs/hknews-backend-1.0.0.jar"
+    chdir: "{{ frontend_project_path }}"
+    creates: "{{ frontend_project_path }}/node_modules"
+
+- name: Build frontend
+  become: true
+  command: "npm run build"
+  args:
+    chdir: "{{ frontend_project_path }}"
+    creates: "{{ frontend_project_path }}/build/index.html"
+  environment:
+    REACT_APP_API_ENDPOINT: "https://{{ domain_name }}"
+
+- name: Copy frontend artifacts to backend
+  become: true
+  copy:
+    src: "{{ frontend_project_path }}/*"
+    dest: "{{ backend_project_path }}/src/main/resources/public"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Build backend
+  become: true
+  command: "{{ backend_project_path }}/build.sh"
+  args:
+    chdir: "{{ backend_project_path }}"
+    creates: "{{ backend_project_path }}/build/libs/hknews-backend-1.0.0.jar"

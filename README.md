@@ -44,3 +44,10 @@ You will need key pairs for connecting the newly provisioned system using SSH. C
   ```sh
   terraform apply main
   ```
+
+## HK News Backend
+[hknews-backend](https://github.com/ayltai/hknews-backend)
+
+## HK News Frontend
+[hknews-android](https://github.com/ayltai/hknews-android)
+[hknews-web](https://github.com/ayltai/hknews-web)

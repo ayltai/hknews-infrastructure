@@ -1,6 +1,6 @@
 galaxy_info:
   author: Alan Tai
-  description: Install PM2
+  description: Install NodeJS
   license: MIT
   min_ansible_version: 2.4
   platforms:
@@ -8,8 +8,8 @@ galaxy_info:
       versions:
         - bionic
   galaxy_tags:
-    - pm2
-    - process
+    - node
+    - nodejs
+    - npm
 dependencies:
   - role: initialize
-  - role: node

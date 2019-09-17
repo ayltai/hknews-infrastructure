@@ -15,6 +15,9 @@
     - name: mongodb
       include_role:
         name: mongodb
+    - name: node
+      include_role:
+        name: node
     - name: pm2
       include_role:
         name: pm2
@@ -38,6 +41,8 @@
         name: cleanup
   vars:
     domain_name: hknews.dev
-    project_path: /home/ubuntu/projects/hknews-backend
-    project_repo: https://github.com/ayltai/hknews-backend.git
+    backend_project_path: /home/ubuntu/projects/hknews-backend
+    backend_project_repo: https://github.com/ayltai/hknews-backend.git
+    frontend_project_path: /home/ubuntu/projects/hknews-web
+    frontend_project_repo: https://github.com/ayltai/hknews-web.git
     email: ayltai@gmail.com
