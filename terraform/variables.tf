@@ -92,3 +92,8 @@ variable "user" {
   description = "AMI user"
   default     = "ubuntu"
 }
+
+variable "domain" {
+  description = "Public domain name"
+  default     = "hknews.dev"
+}

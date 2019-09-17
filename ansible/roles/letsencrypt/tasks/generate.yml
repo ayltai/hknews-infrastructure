@@ -1,5 +1,5 @@
 ---
-- name: Wait 30 minutes for DNS to resolve {{ domain_name }}
+- name: Wait a maximum of 30 minutes for DNS to resolve {{ domain_name }}
   wait_for:
     timeout: 1800
     host: "{{ domain_name }}"
