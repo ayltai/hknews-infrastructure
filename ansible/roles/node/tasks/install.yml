@@ -13,9 +13,26 @@
       - ansible_distribution == 'Ubuntu'
       - ansible_distribution_version == '18.04'
 
-- name: Add NodeSource repository
+- name: Download NodeJS setup script
   become: true
-  command: "wget -qO- https://deb.nodesource.com/setup_{{ nodejs_version }}.x | bash -"
+  get_url:
+    url: "https://deb.nodesource.com/setup_{{ nodejs_version }}.x"
+    dest: "/root/node_setup.sh"
+
+- name: Set proper permission for NodeJS setup script
+  become: true
+  file:
+    path: "/root/node_setup.sh"
+    mode: "u+x"
+
+- name: Setup NodeJS repository
+  become: true
+  shell: "/root/node_setup.sh"
+
+- name: Remove NodeJS setup script
+  file:
+    path: "/root/node_setup.sh"
+    state: absent
 
 - name: Install NodeJS
   become: true

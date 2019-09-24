@@ -6,6 +6,7 @@
   vars:
     packages:
       - software-properties-common
+      - curl
       - wget
       - unzip
   when:
