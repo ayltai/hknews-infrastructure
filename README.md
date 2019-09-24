@@ -13,6 +13,13 @@ Automates HK News server provisioning and configurations. Made with ❤
 ## Prerequisites
 You will need [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansible.com/) to run the scripts in this repository.
 
+### AWS permissions
+You will need the following policies attached to the AWS user account used to run the scripts:
+* AmazonEC2FullAccess
+* AmazonVPCFullAccess
+* AmazonRoute53FullAccess
+* CloudWatchActionsEC2Access
+
 ### Installing Terraform
 Follow the [official documentation](https://learn.hashicorp.com/terraform/getting-started/install.html) to install [Terraform](https://www.terraform.io/).
 
