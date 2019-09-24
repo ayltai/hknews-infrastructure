@@ -1,10 +1,10 @@
 resource "aws_security_group" "hknews" {
   name        = "hknews"
   description = "HK News security group"
-  vpc_id      = "${aws_vpc.hknews.id}"
+  vpc_id      = aws_vpc.hknews.id
 
   tags = {
-    Name = "${var.tag}"
+    Name = var.tag
   }
 
   ingress {
@@ -23,8 +23,8 @@ resource "aws_security_group" "hknews" {
 
   ingress {
     description = "SSH"
-    from_port   = "${var.ssh_port}"
-    to_port     = "${var.ssh_port}"
+    from_port   = var.ssh_port
+    to_port     = var.ssh_port
     protocol    = "tcp"
 
     cidr_blocks = [
@@ -34,8 +34,8 @@ resource "aws_security_group" "hknews" {
 
   ingress {
     description = "HTTP"
-    from_port   = "${var.http_port}"
-    to_port     = "${var.http_port}"
+    from_port   = var.http_port
+    to_port     = var.http_port
     protocol    = "tcp"
 
     cidr_blocks = [
@@ -45,8 +45,8 @@ resource "aws_security_group" "hknews" {
 
   ingress {
     description = "HTTPS"
-    from_port   = "${var.https_port}"
-    to_port     = "${var.https_port}"
+    from_port   = var.https_port
+    to_port     = var.https_port
     protocol    = "tcp"
 
     cidr_blocks = [
@@ -56,8 +56,8 @@ resource "aws_security_group" "hknews" {
 
   ingress {
     description = "Grafana"
-    from_port   = "${var.grafana_port}"
-    to_port     = "${var.grafana_port}"
+    from_port   = var.grafana_port
+    to_port     = var.grafana_port
     protocol    = "tcp"
 
     cidr_blocks = [
@@ -67,8 +67,8 @@ resource "aws_security_group" "hknews" {
 
   ingress {
     description = "Prometheus"
-    from_port   = "${var.prometheus_port}"
-    to_port     = "${var.prometheus_port}"
+    from_port   = var.prometheus_port
+    to_port     = var.prometheus_port
     protocol    = "tcp"
 
     cidr_blocks = [
@@ -89,5 +89,5 @@ resource "aws_security_group" "hknews" {
 
 resource "aws_key_pair" "hknews" {
   key_name   = "hknews"
-  public_key = "${file(var.public_key)}"
+  public_key = file(var.public_key)
 }

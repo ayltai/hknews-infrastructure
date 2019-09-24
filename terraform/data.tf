@@ -3,7 +3,7 @@ data "aws_ami" "ubuntu" {
     name = "name"
 
     values = [
-      "${var.ami_filter}",
+      var.ami_filter,
     ]
   }
 
@@ -16,7 +16,7 @@ data "aws_ami" "ubuntu" {
   }
 
   owners = [
-    "${var.ami_owner}",
+    var.ami_owner,
   ]
 
   most_recent = true
