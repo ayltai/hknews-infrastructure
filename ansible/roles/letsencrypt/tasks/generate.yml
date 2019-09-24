@@ -30,10 +30,10 @@
     -export \
     -in /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem \
     -inkey /etc/letsencrypt/live/{{ domain_name }}/privkey.pem \
-    -out {{ project_path }}/keystore.p12 \
+    -out {{ backend_project_path }}/keystore.p12 \
     -name keystore
   args:
-    creates: "{{ project_path }}/keystore.p12"
+    creates: "{{ backend_project_path }}/keystore.p12"
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '18.04'
@@ -45,10 +45,10 @@
     -importkeystore \
     -deststorepass {{ ssl_key }} \
     -destkeypass {{ ssl_key }} \
-    -destkeystore {{ project_path }}/keystore.jks \
-    -srckeystore {{ project_path }}/keystore.p12 \
+    -destkeystore {{ backend_project_path }}/keystore.jks \
+    -srckeystore {{ backend_project_path }}/keystore.p12 \
     -srcstoretype PKCS12 \
     -srcstorepass {{ ssl_key }} \
     -alias keystore
   args:
-    creates: "{{ project_path }}/keystore.jks"
+    creates: "{{ backend_project_path }}/keystore.jks"

@@ -3,7 +3,7 @@
   become: true
   copy:
     src: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
-    dest: "{{ project_path }}/keystore.pem"
+    dest: "{{ backend_project_path }}/keystore.pem"
     owner: root
     group: root
     mode: 0644
@@ -15,7 +15,7 @@
   become: true
   copy:
     src: "/etc/letsencrypt/live/{{ domain_name }}/privkey.pem"
-    dest: "{{ project_path }}/private.key"
+    dest: "{{ backend_project_path }}/private.key"
     owner: root
     group: root
     mode: 0644
