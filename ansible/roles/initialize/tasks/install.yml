@@ -2,7 +2,7 @@
 - name: Install prerequisites
   become: true
   apt:
-    name: software-properties-common
+    name: software-properties-common wget unzip
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '18.04'
