@@ -14,6 +14,7 @@
     creates: "{{ frontend_project_path }}/build/index.html"
   environment:
     REACT_APP_API_ENDPOINT: "https://{{ domain_name }}"
+    REACT_APP_PROJECT_URL: "https://github.com/ayltai/hknews-web"
 
 - name: Copy frontend artifacts to backend
   become: true
