@@ -8,3 +8,30 @@
   become: true
   hostname:
     name: "{{ domain_name }}"
+
+- name: Copy script to update system
+  become: true
+  copy:
+    src: update.sh
+    dest: /root/update.sh
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Copy script to start services
+  become: true
+  copy:
+    src: start.sh
+    dest: /root/start.sh
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Copy script to stop services
+  become: true
+  copy:
+    src: stop.sh
+    dest: /root/stop.sh
+    owner: root
+    group: root
+    mode: 0755
