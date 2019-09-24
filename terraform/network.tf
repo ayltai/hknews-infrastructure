@@ -36,14 +36,13 @@ resource "aws_route53_record" "hknews" {
   ]
 }
 
-resource "aws_route53_record" "hknews" {
+resource "aws_route53_record" "catchall" {
   name    = "*.${var.domain}"
   zone_id = aws_route53_zone.hknews.zone_id
   type    = "A"
+  ttl     = "3600"
 
-  alias {
-    name                   = "*"
-    zone_id                = aws_route53_zone.hknews.zone_id
-    evaluate_target_health = false
-  }
+  records = [
+    aws_eip.hknews.public_ip,
+  ]
 }
