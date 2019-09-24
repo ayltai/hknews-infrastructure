@@ -15,7 +15,7 @@
 
 - name: Add NodeSource repository
   become: true
-  command: "wget -qO- https://deb.nodesource.com/setup_{{ nodejs_version }}.x | sudo -E bash -"
+  command: "wget -qO- https://deb.nodesource.com/setup_{{ nodejs_version }}.x | bash -"
 
 - name: Install NodeJS
   become: true
