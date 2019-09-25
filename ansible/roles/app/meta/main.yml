@@ -12,9 +12,9 @@ galaxy_info:
     - checkout
 dependencies:
   - role: initialize
+  - role: java
   - role: letsencrypt
   - role: git
-  - role: java
   - role: mongodb
   - role: node
   - role: pm2

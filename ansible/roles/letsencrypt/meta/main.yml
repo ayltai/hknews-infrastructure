@@ -14,3 +14,4 @@ galaxy_info:
     - network
 dependencies:
   - role: initialize
+  - role: java
