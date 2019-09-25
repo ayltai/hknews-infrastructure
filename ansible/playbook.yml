@@ -6,6 +6,9 @@
     - name: initialize
       include_role:
         name: initialize
+    - name: letsencrypt
+      include_role:
+        name: letsencrypt
     - name: git
       include_role:
         name: git
@@ -33,9 +36,6 @@
     - name: app
       include_role:
         name: app
-    - name: letsencrypt
-      include_role:
-        name: letsencrypt
     - name: cleanup
       include_role:
         name: cleanup
