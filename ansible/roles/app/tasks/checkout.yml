@@ -1,13 +1,11 @@
 ---
 - name: Checkout backend repository
-  become: true
   git:
     repo: "{{ backend_project_repo }}"
     dest: "{{ backend_project_path }}"
     version: master
 
 - name: Checkout frontend repository
-  become: true
   git:
     repo: "{{ frontend_project_repo }}"
     dest: "{{ frontend_project_path }}"

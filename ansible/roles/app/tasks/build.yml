@@ -1,13 +1,11 @@
 ---
 - name: Install frontend dependencies
-  become: true
   command: "npm i --production"
   args:
     chdir: "{{ frontend_project_path }}"
     creates: "{{ frontend_project_path }}/node_modules"
 
 - name: Build frontend
-  become: true
   command: "npm run build"
   args:
     chdir: "{{ frontend_project_path }}"
@@ -17,16 +15,14 @@
     REACT_APP_PROJECT_URL: "https://github.com/ayltai/hknews-web"
 
 - name: Copy frontend artifacts to backend
-  become: true
   copy:
     src: "{{ frontend_project_path }}/*"
     dest: "{{ backend_project_path }}/src/main/resources/public"
-    owner: root
-    group: root
+    owner: ubuntu
+    group: ubuntu
     mode: 0644
 
 - name: Build backend
-  become: true
   command: "{{ backend_project_path }}/build.sh"
   args:
     chdir: "{{ backend_project_path }}"

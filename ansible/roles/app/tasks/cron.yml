@@ -1,5 +1,6 @@
 ---
 - name: Add a cron job to run application on system reboot
+  become: true
   cron:
     name: hknews
     special_time: reboot
