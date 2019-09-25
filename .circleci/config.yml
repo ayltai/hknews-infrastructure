@@ -47,19 +47,19 @@ jobs:
           command: chmod 600 ~/.ssh/hknews.pem
       - run:
           name: Initialize Terraform backend and plugins
-          command: echo 1 | terraform init -no-color
+          command: echo 1 | terraform init
           working_directory: terraform
       - run:
           name: Validate the syntax of Terraform scripts
-          command: terraform validate -no-color
+          command: terraform validate
           working_directory: terraform
       - run:
           name: Plan for the changes
-          command: terraform plan -no-color -out main
+          command: terraform plan -out main
           working_directory: terraform
       - run:
           name: Apply the changes
-          command: terraform apply -no-color main
+          command: terraform apply main
           working_directory: terraform
           no_output_timeout: 40m
 
@@ -68,9 +68,14 @@ workflows:
   workflow:
     jobs:
       - check
+      - approval:
+          type: approval
+          requires:
+            - check
       - deploy:
           requires:
             - check
+            - approval
           filters:
             branches:
               only:
