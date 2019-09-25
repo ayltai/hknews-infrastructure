@@ -46,6 +46,9 @@ jobs:
           name: Change SSH private key permission
           command: chmod 400 ~/.ssh/hknews.pem
       - run:
+          name: Create Ansible Vault password file
+          command: echo $VAULT_PASSWORD_FILE | base64 -di > ~/vault.pass
+      - run:
           name: Initialize Terraform backend and plugins
           command: echo 1 | terraform init
           working_directory: terraform

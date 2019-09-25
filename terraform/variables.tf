@@ -63,6 +63,11 @@ variable "private_key" {
   default     = "~/.ssh/hknews.pem"
 }
 
+variable "vault_password_file" {
+  description = "Ansible Vault password file"
+  default     = "~/vault.pass"
+}
+
 variable "ssh_port" {
   description = "The port for handling SSH requests"
   default     = 22
