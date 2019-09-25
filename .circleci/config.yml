@@ -44,7 +44,7 @@ jobs:
           command: echo $SSH_PRIVATE_KEY | base64 -di > ~/.ssh/hknews.pem
       - run:
           name: Change SSH private key permission
-          command: chmod 600 ~/.ssh/hknews.pem
+          command: chmod 400 ~/.ssh/hknews.pem
       - run:
           name: Initialize Terraform backend and plugins
           command: echo 1 | terraform init
