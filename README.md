@@ -34,6 +34,14 @@ You will need key pairs for connecting the newly provisioned system using SSH. C
 3. Save your public key to `./ssh/hknews.pub` (or as specified in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf))
 4. Change the variables defined in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf) and [playbook.yml](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/playbook.yml) to fit your needs.
 
+### Ansible Vault password
+The SSH certificate password is encrypted by [Ansible Vault](). You will need to specify a Vault password file in order to decrypt the password during the Ansible automation process. The file path is defined in [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt/vars/main.yml).
+
+### DNS
+We prefer to use an external DNS provider instead of [AWS Route53](https://aws.amazon.com/route53/) to manage the server public domain.
+
+The public IPv4 address of the EC2 instance created will be printed out in your console during the Terraform automation process. You are expected to configure your DNS provider to resolve the domain name to this IP address. [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt) will wait for at most 30 minutes for this.
+
 ## Provisioning
 1. Go to [terraform](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform) directory
   ```sh
