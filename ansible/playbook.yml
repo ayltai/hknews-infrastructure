@@ -6,15 +6,15 @@
     - name: initialize
       include_role:
         name: initialize
-    - name: java
-      include_role:
-        name: java
     - name: letsencrypt
       include_role:
         name: letsencrypt
     - name: git
       include_role:
         name: git
+    - name: java
+      include_role:
+        name: java
     - name: mongodb
       include_role:
         name: mongodb

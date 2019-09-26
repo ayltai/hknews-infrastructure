@@ -4,6 +4,7 @@
   copy:
     src: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
     dest: "{{ backend_project_path }}/keystore.pem"
+    remote_src: yes
     owner: root
     group: root
     mode: 0644
@@ -16,6 +17,7 @@
   copy:
     src: "/etc/letsencrypt/live/{{ domain_name }}/privkey.pem"
     dest: "{{ backend_project_path }}/private.key"
+    remote_src: yes
     owner: root
     group: root
     mode: 0644
