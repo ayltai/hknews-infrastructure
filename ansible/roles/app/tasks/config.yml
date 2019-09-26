@@ -55,3 +55,23 @@
     -alias keystore
   args:
     creates: "{{ project_path }}/keystore.jks"
+
+- name: Create artifact directory
+  file:
+    path: "{{ project_path }}/build/libs"
+    state: directory
+    mode: 0755
+    recurse: yes
+
+- name: Copy script to remote host
+  copy:
+    src: download.sh
+    dest: "{{ project_path }}/build/libs/download.sh"
+
+- name: Download artifact
+  shell: download.sh
+  args:
+    chdir: "{{ project_path }}/build/libs/"
+    creates: "{{ project_path }}/build/libs/hknews-backend-1.0.0.jar"
+  environment:
+    CIRCLECI_TOKEN: "{{ circleci_token }}"
