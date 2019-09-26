@@ -1,26 +1,20 @@
 ---
-- name: Install frontend dependencies
-  command: "npm i --production"
+- name: Download artifacts list
+  command: "wget $(curl https://circleci.com/api/v1.1/project/github/ayltai/hknews-web/latest/artifacts?circle-token={{ circleci_token }} | jq -r '.[0].url')"
   args:
-    chdir: "{{ frontend_project_path }}"
-    creates: "{{ frontend_project_path }}/node_modules"
+    chdir: "{{ backend_project_path }}/src/main/resources/public"
+    creates: "{{ backend_project_path }}/src/main/resources/public/web.zip"
 
-- name: Build frontend
-  command: "npm run build"
+- name: Decompress artifacts
+  command: "unzip web.zip"
   args:
-    chdir: "{{ frontend_project_path }}"
-    creates: "{{ frontend_project_path }}/build/index.html"
-  environment:
-    REACT_APP_API_ENDPOINT: "https://{{ domain_name }}"
-    REACT_APP_PROJECT_URL: "https://github.com/ayltai/hknews-web"
+    chdir: "{{ backend_project_path }}/src/main/resources/public"
+    creates: "{{ backend_project_path }}/src/main/resources/public/index.html"
 
-- name: Copy frontend artifacts to backend
-  copy:
-    src: "{{ frontend_project_path }}/*"
-    dest: "{{ backend_project_path }}/src/main/resources/public"
-    owner: ubuntu
-    group: ubuntu
-    mode: 0644
+- name: Remove compressed artifacts
+  file:
+    path: "{{ backend_project_path }}/src/main/resources/public/web.zip"
+    state: absent
 
 - name: Build backend
   command: "{{ backend_project_path }}/build.sh"

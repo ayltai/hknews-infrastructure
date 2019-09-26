@@ -4,9 +4,3 @@
     repo: "{{ backend_project_repo }}"
     dest: "{{ backend_project_path }}"
     version: master
-
-- name: Checkout frontend repository
-  git:
-    repo: "{{ frontend_project_repo }}"
-    dest: "{{ frontend_project_path }}"
-    version: master
