@@ -1,23 +1,13 @@
 ---
-- name: Download artifacts list
-  command: "wget $(curl https://circleci.com/api/v1.1/project/github/ayltai/hknews-web/latest/artifacts?circle-token={{ circleci_token }} | jq -r '.[0].url')"
-  args:
-    chdir: "{{ backend_project_path }}/src/main/resources/public"
-    creates: "{{ backend_project_path }}/src/main/resources/public/web.zip"
-
-- name: Decompress artifacts
-  command: "unzip web.zip"
-  args:
-    chdir: "{{ backend_project_path }}/src/main/resources/public"
-    creates: "{{ backend_project_path }}/src/main/resources/public/index.html"
-
-- name: Remove compressed artifacts
+- name: Create artifact directory
   file:
-    path: "{{ backend_project_path }}/src/main/resources/public/web.zip"
-    state: absent
+    path: "{{ project_path }}/build/libs"
+    state: directory
+    mode: 755
+    recurse: yes
 
-- name: Build backend
-  command: "{{ backend_project_path }}/build.sh"
+- name: Download artifacts list
+  command: "wget $(curl https://circleci.com/api/v1.1/project/github/ayltai/hknews-backend/latest/artifacts?circle-token={{ circleci_token }} | jq -r '.[0].url')"
   args:
-    chdir: "{{ backend_project_path }}"
-    creates: "{{ backend_project_path }}/build/libs/hknews-backend-1.0.0.jar"
+    chdir: "{{ project_path }}/build/libs"
+    creates: "{{ project_path }}/build/libs/hknews-backend-1.0.0.jar"

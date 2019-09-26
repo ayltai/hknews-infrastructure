@@ -3,7 +3,7 @@
   become: true
   copy:
     src: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
-    dest: "{{ backend_project_path }}/keystore.pem"
+    dest: "{{ project_path }}/keystore.pem"
     remote_src: yes
     owner: root
     group: root
@@ -16,7 +16,7 @@
   become: true
   copy:
     src: "/etc/letsencrypt/live/{{ domain_name }}/privkey.pem"
-    dest: "{{ backend_project_path }}/private.key"
+    dest: "{{ project_path }}/private.key"
     remote_src: yes
     owner: root
     group: root
@@ -33,10 +33,10 @@
     -in /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem \
     -inkey /etc/letsencrypt/live/{{ domain_name }}/privkey.pem \
     -password pass:{{ ssl_key }}
-    -out {{ backend_project_path }}/keystore.p12 \
+    -out {{ project_path }}/keystore.p12 \
     -name keystore
   args:
-    creates: "{{ backend_project_path }}/keystore.p12"
+    creates: "{{ project_path }}/keystore.p12"
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '18.04'
@@ -48,10 +48,10 @@
     -importkeystore \
     -deststorepass {{ ssl_key }} \
     -destkeypass {{ ssl_key }} \
-    -destkeystore {{ backend_project_path }}/keystore.jks \
-    -srckeystore {{ backend_project_path }}/keystore.p12 \
+    -destkeystore {{ project_path }}/keystore.jks \
+    -srckeystore {{ project_path }}/keystore.p12 \
     -srcstoretype PKCS12 \
     -srcstorepass {{ ssl_key }} \
     -alias keystore
   args:
-    creates: "{{ backend_project_path }}/keystore.jks"
+    creates: "{{ project_path }}/keystore.jks"

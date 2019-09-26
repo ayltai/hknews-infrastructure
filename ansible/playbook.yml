@@ -41,8 +41,6 @@
         name: cleanup
   vars:
     domain_name: hknews.dev
-    backend_project_path: /home/ubuntu/projects/hknews-backend
-    backend_project_repo: https://github.com/ayltai/hknews-backend.git
-    frontend_project_path: /home/ubuntu/projects/hknews-web
-    frontend_project_repo: https://github.com/ayltai/hknews-web.git
+    project_path: /home/ubuntu/projects/hknews-backend
+    project_repo: https://github.com/ayltai/hknews-backend.git
     email: ayltai@gmail.com

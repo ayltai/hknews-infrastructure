@@ -1,6 +1,6 @@
 ---
 - name: Checkout backend repository
   git:
-    repo: "{{ backend_project_repo }}"
-    dest: "{{ backend_project_path }}"
+    repo: "{{ project_repo }}"
+    dest: "{{ project_path }}"
     version: master
