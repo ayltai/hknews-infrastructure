@@ -11,5 +11,4 @@ galaxy_info:
     - pm2
     - process
 dependencies:
-  - role: initialize
   - role: node

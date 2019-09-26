@@ -12,5 +12,4 @@ galaxy_info:
     - security
     - network
     - system
-dependencies:
-  - role: initialize
+dependencies: []

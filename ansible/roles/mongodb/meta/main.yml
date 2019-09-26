@@ -10,5 +10,4 @@ galaxy_info:
   galaxy_tags:
     - mongodb
     - database
-dependencies:
-  - role: initialize
+dependencies: []

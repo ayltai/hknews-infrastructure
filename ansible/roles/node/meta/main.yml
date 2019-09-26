@@ -11,5 +11,4 @@ galaxy_info:
     - node
     - nodejs
     - npm
-dependencies:
-  - role: initialize
+dependencies: []

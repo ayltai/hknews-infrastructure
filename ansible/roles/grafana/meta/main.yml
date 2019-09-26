@@ -13,6 +13,4 @@ galaxy_info:
     - visualization
     - system
 dependencies:
-  - role: initialize
-  - role: letsencrypt
   - role: prometheus

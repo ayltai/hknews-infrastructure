@@ -11,5 +11,4 @@ galaxy_info:
     - ubuntu
     - apt
     - clean
-dependencies:
-  - role: initialize
+dependencies: []

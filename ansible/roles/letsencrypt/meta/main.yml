@@ -12,5 +12,4 @@ galaxy_info:
     - ssl
     - certificate
     - network
-dependencies:
-  - role: initialize
+dependencies: []

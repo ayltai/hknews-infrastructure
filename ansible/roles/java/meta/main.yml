@@ -11,5 +11,4 @@ galaxy_info:
     - java
     - jdk
     - jvm
-dependencies:
-  - role: initialize
+dependencies: []

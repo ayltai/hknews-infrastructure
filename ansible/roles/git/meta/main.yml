@@ -12,5 +12,4 @@ galaxy_info:
     - scm
     - vcs
     - versioning
-dependencies:
-  - role: initialize
+dependencies: []

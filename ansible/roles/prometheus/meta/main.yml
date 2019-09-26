@@ -12,6 +12,4 @@ galaxy_info:
     - monitoring
     - health
     - system
-dependencies:
-  - role: initialize
-  - role: mongodb
+dependencies: []
