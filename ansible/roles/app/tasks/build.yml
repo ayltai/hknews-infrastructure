@@ -17,7 +17,7 @@
 - name: Download artifacts list
   shell: download.sh
   environment:
-    CIRCLECI_TOKEN: {{ circleci_token }}
+    CIRCLECI_TOKEN: "{{ circleci_token }}"
   args:
     chdir: "{{ project_path }}/build/libs"
     creates: "{{ project_path }}/build/libs/hknews-backend-1.0.0.jar"
