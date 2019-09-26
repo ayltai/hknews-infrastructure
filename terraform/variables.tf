@@ -35,7 +35,7 @@ variable "ami_owner" {
 
 variable "instance_type" {
   description = "EC2 instance type"
-  default     = "t2.micro"
+  default     = "t3a.micro"
 }
 
 variable "instance_count" {
