@@ -3,11 +3,21 @@
   file:
     path: "{{ project_path }}/build/libs"
     state: directory
-    mode: 755
+    mode: 0755
     recurse: yes
 
+- name: Copy script to remote host
+  copy:
+    src: download.sh
+    dest: "{{ project_path }}/build/libs"
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+
 - name: Download artifacts list
-  command: "wget $(curl https://circleci.com/api/v1.1/project/github/ayltai/hknews-backend/latest/artifacts?circle-token={{ circleci_token }} | jq -r '.[0].url')"
+  shell: download.sh
+  environment:
+    CIRCLECI_TOKEN: {{ circleci_token }}
   args:
     chdir: "{{ project_path }}/build/libs"
     creates: "{{ project_path }}/build/libs/hknews-backend-1.0.0.jar"
