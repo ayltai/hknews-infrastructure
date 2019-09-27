@@ -13,7 +13,7 @@
   become: true
   copy:
     src: update.sh
-    dest: /root/update.sh
+    dest: /home/ubuntu/update.sh
     owner: root
     group: root
     mode: 0755
@@ -22,7 +22,7 @@
   become: true
   copy:
     src: start.sh
-    dest: /root/start.sh
+    dest: /home/ubuntu/start.sh
     owner: root
     group: root
     mode: 0755
@@ -31,7 +31,7 @@
   become: true
   copy:
     src: stop.sh
-    dest: /root/stop.sh
+    dest: /home/ubuntu/stop.sh
     owner: root
     group: root
     mode: 0755

@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=HK News Backend service
+
+[Service]
+User=root
+WorkingDirectory={{ project_path }}
+ExecStart={{ project_path }}/start.sh
+After=mongod.target
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
