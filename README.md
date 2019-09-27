@@ -41,6 +41,9 @@ We prefer to use an external DNS provider instead of [AWS Route53](https://aws.a
 
 The Elastic public IPv4 address of the EC2 instance created will be printed out in your console during the Terraform automation process. You are expected to configure your DNS provider to resolve the domain name to this IP address. [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt) will wait for at most 30 minutes for this.
 
+## Post installation
+Since we are associating an Elastic IP to an EC2 instance, the Elastic IP must be created **after** the EC2 instance. The Ansible playbook will be executed against a temporary public IP and when it finishes, you are expected to configure your DNS provider to resolve the domain name to the Elastic IP, which will be displayed at the very end of the whole process.
+
 ## Provisioning
 1. Go to [terraform](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform) directory
   ```sh
