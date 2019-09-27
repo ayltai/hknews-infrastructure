@@ -1,8 +1,9 @@
 resource "aws_instance" "hknews" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
-  subnet_id     = aws_subnet.hknews.id
-  key_name      = aws_key_pair.hknews.key_name
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = var.instance_type
+  subnet_id                   = aws_subnet.hknews.id
+  associate_public_ip_address = "true"
+  key_name                    = aws_key_pair.hknews.key_name
 
   vpc_security_group_ids = [
     aws_security_group.hknews.id,
