@@ -18,6 +18,7 @@
     --rsa-key-size 4096 \
     --renew-by-default \
     --email {{ email }} \
-    -d {{ domain_name }}
+    -d {{ domain_name }} \
+    -d api.{{ domain_name }}
   args:
     creates: "/etc/letsencrypt/live/{{ domain_name }}"
