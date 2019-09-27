@@ -9,8 +9,8 @@ resource "aws_vpc" "hknews" {
 }
 
 resource "aws_eip" "hknews" {
-  instance   = aws_instance.hknews[0].id
-  vpc        = true
+  instance = aws_instance.hknews[0].id
+  vpc      = true
 
   depends_on = [
     "aws_internet_gateway.hknews"
