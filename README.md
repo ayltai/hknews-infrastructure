@@ -39,7 +39,7 @@ The SSH certificate password is encrypted by [Ansible Vault](). You will need to
 ### DNS
 We prefer to use an external DNS provider instead of [AWS Route53](https://aws.amazon.com/route53/) to manage the server public domain.
 
-The public IPv4 address of the EC2 instance created will be printed out in your console during the Terraform automation process. You are expected to configure your DNS provider to resolve the domain name to this IP address. [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt) will wait for at most 30 minutes for this.
+The Elastic public IPv4 address of the EC2 instance created will be printed out in your console during the Terraform automation process. You are expected to configure your DNS provider to resolve the domain name to this IP address. [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt) will wait for at most 30 minutes for this.
 
 ## Provisioning
 1. Go to [terraform](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform) directory

@@ -38,11 +38,6 @@ variable "instance_type" {
   default     = "t3a.micro"
 }
 
-variable "instance_count" {
-  description = "Number of EC2 instances"
-  default     = 1
-}
-
 variable "storage_size" {
   description = "The size of the storage attached to EC2 instances"
   default     = 10

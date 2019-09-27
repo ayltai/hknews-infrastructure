@@ -10,5 +10,5 @@ provider "aws" {
 }
 
 output "public_ip" {
-  value = aws_instance.hknews.*.public_ip
+  value = aws_eip.hknews.public_ip
 }

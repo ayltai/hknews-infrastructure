@@ -1,10 +1,8 @@
 resource "aws_instance" "hknews" {
-  ami                         = data.aws_ami.ubuntu.id
-  instance_type               = var.instance_type
-  count                       = var.instance_count
-  subnet_id                   = aws_subnet.hknews.id
-  associate_public_ip_address = "true"
-  key_name                    = aws_key_pair.hknews.key_name
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.instance_type
+  subnet_id     = aws_subnet.hknews.id
+  key_name      = aws_key_pair.hknews.key_name
 
   vpc_security_group_ids = [
     aws_security_group.hknews.id,
@@ -20,7 +18,7 @@ resource "aws_instance" "hknews" {
     ]
 
     connection {
-      host        = aws_instance.hknews.0.public_ip
+      host        = aws_instance.hknews.public_ip
       private_key = file(var.private_key)
       user        = var.user
     }
@@ -31,7 +29,7 @@ resource "aws_instance" "hknews" {
       sleep 50;
       >inventory.ini;
       echo "[hknews]" | tee -a inventory.ini;
-      echo "${aws_instance.hknews.0.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a inventory.ini;
+      echo "${aws_eip.hknews.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a inventory.ini;
       export ANSIBLE_HOST_KEY_CHECKING=False;
       ansible-playbook -u ${var.user} --private-key ${var.private_key} --vault-password-file ${var.vault_password_file} -i inventory.ini ../ansible/playbook.yml
     EOT
