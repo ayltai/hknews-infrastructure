@@ -19,6 +19,6 @@
     --renew-by-default \
     --email {{ email }} \
     -d {{ domain_name }} \
-    -d api.{{ domain_name }}
+    -d app.{{ domain_name }}
   args:
     creates: "/etc/letsencrypt/live/{{ domain_name }}"

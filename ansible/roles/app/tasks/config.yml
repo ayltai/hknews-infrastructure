@@ -47,8 +47,6 @@
     src: "{{ project_path }}/keystore.p12"
     dest: "{{ project_path }}/src/main/resources/keystore.p12"
     remote_src: true
-  args:
-    creates: "{{ project_path }}/src/main/resources/keystore.p12"
 
 - name: Gererate JKS certificate
   become: true
@@ -71,8 +69,6 @@
     src: "{{ project_path }}/keystore.jks"
     dest: "{{ project_path }}/src/main/resources/keystore.jks"
     remote_src: true
-  args:
-    creates: "{{ project_path }}/src/main/resources/keystore.jks"
 
 - name: Create artifact directory
   file:
