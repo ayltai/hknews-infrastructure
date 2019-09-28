@@ -1,9 +1,7 @@
 ---
 - name: Add a cron job to run application on system reboot
   become: true
-  template:
-    src: hknews.service.j2
-    dest: /lib/systemd/system/hknews.service
-    mode: 0644
-  notify:
-    - Restart hknews
+  cron:
+    name: hknews
+    special_time: reboot
+    job: "sleep 1m; {{ project_path }}/start.sh"

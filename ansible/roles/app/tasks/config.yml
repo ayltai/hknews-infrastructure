@@ -88,3 +88,12 @@
     creates: "{{ project_path }}/build/libs/hknews-backend-1.0.0.jar"
   environment:
     CIRCLECI_TOKEN: "{{ circleci_token }}"
+
+- name: Copy script to start server
+  become: true
+  template:
+    src: start.sh
+    dest: "{{ project_path }}/start.sh"
+    owner: root
+    group: root
+    mode: 0755

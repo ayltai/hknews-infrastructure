@@ -1,7 +1,0 @@
----
-- name: Restart hknews
-  become: true
-  service:
-    name: hknews
-    state: restarted
-  when: service_default_state | default('started') == 'started'
