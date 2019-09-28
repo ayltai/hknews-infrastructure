@@ -41,6 +41,15 @@
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '18.04'
 
+- name: Copy P12 certificate to classpath
+  become: true
+  copy:
+    src: "{{ project_path }}/keystore.p12"
+    dest: "{{ project_path }}/src/main/resources/keystore.p12"
+    remote_src: true
+  args:
+    creates: "{{ project_path }}/src/main/resources/keystore.p12"
+
 - name: Gererate JKS certificate
   become: true
   command: |
@@ -55,6 +64,15 @@
     -alias keystore
   args:
     creates: "{{ project_path }}/keystore.jks"
+
+- name: Copy P12 certificate to classpath
+  become: true
+  copy:
+    src: "{{ project_path }}/keystore.jks"
+    dest: "{{ project_path }}/src/main/resources/keystore.jks"
+    remote_src: true
+  args:
+    creates: "{{ project_path }}/src/main/resources/keystore.jks"
 
 - name: Create artifact directory
   file:
