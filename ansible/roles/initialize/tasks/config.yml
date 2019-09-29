@@ -9,6 +9,22 @@
   hostname:
     name: "{{ domain_name }}"
 
+- name: Change number of open files limit
+  become: true
+  pam_limits:
+    domain: "*"
+    limit_type: soft
+    limit_item: nofile
+    value: 64000
+
+- name: Change number of processes limit
+  become: true
+  pam_limits:
+    domain: "*"
+    limit_type: soft
+    limit_item: nproc
+    value: 64000
+
 - name: Copy script to update system
   become: true
   copy:
