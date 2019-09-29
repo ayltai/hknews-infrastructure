@@ -23,12 +23,8 @@ scrape_configs:
   - job_name: 'springboot'
     metrics_path: '/actuator/prometheus'
     scheme: https
-    static_configs: 
-      - targets: ['{{ domain_name }}:443']
-
-  - job_name: 'mongodb'
     static_configs:
-      - targets: ['localhost:9001']
+      - targets: ['{{ domain_name }}:443']
 
   - job_name: 'prometheus'
     # Override the global default and scrape targets from this job every 5 seconds.

@@ -7,7 +7,6 @@
     packages:
       - prometheus
       - prometheus-node-exporter
-      - prometheus-mongodb-exporter
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '18.04'

@@ -5,10 +5,3 @@
     name: prometheus
     state: started
     enabled: yes
-
-- name: Create Prometheus MongoDB Exporter
-  become: true
-  service:
-    name: prometheus-mongodb-exporter
-    state: started
-    enabled: yes
