@@ -2,6 +2,7 @@
 
 [![CircleCI](https://img.shields.io/circleci/project/github/ayltai/hknews-infrastructure/master.svg?style=flat)](https://circleci.com/gh/ayltai/hknews-infrastructure)
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ayltai/hknews-infrastructure)](https://cloud.docker.com/u/ayltai/repository/docker/ayltai/hknews-infrastructure)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3231/badge)](https://bestpractices.coreinfrastructure.org/projects/3231)
 [![License](https://img.shields.io/github/license/ayltai/hknews-infrastructure.svg?style=flat)](https://github.com/ayltai/hknews-infrastructure/blob/master/LICENSE)
 
 Automates HK News server provisioning and configurations. Made with ❤
