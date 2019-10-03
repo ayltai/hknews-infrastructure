@@ -13,3 +13,15 @@
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '18.04'
+
+- name: Install Ubuntu LivePatch
+  become: true
+  snap:
+    name: canonical-livepatch
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Enable Ubuntu LivePatch service
+  become: true
+  command: "canonical-livepatch enable {{ ubuntu_livepatch_key }}"
