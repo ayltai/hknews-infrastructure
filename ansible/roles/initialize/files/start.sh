@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-service mongod start && service prometheus start && service grafana-server start
+service mongod start && service instrumentald start
