@@ -1,18 +1,4 @@
 ---
-- name: Make sure apt-transport-https is installed
-  become: true
-  apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
-      - curl
-      - apt-transport-https
-      - lsb-release
-      - ca-certificates
-    when:
-      - ansible_distribution == 'Ubuntu'
-      - ansible_distribution_version == '18.04'
-
 - name: Download NodeJS setup script
   become: true
   get_url:
@@ -30,6 +16,7 @@
   shell: "/root/node_setup.sh"
 
 - name: Remove NodeJS setup script
+  become: true
   file:
     path: "/root/node_setup.sh"
     state: absent

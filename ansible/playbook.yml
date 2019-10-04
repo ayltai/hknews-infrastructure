@@ -27,12 +27,9 @@
     - name: fail2ban
       include_role:
         name: fail2ban
-    - name: prometheus
+    - name: instrumental
       include_role:
-        name: prometheus
-    - name: grafana
-      include_role:
-        name: grafana
+        name: instrumental
     - name: app
       include_role:
         name: app

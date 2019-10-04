@@ -6,9 +6,12 @@
   vars:
     packages:
       - software-properties-common
+      - apt-transport-https
+      - ca-certificates
+      - lsb-release
+      - unzip
       - curl
       - wget
-      - unzip
       - jq
   when:
     - ansible_distribution == 'Ubuntu'
