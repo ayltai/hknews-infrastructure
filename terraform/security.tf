@@ -54,28 +54,6 @@ resource "aws_security_group" "hknews" {
     ]
   }
 
-  ingress {
-    description = "Grafana"
-    from_port   = var.grafana_port
-    to_port     = var.grafana_port
-    protocol    = "tcp"
-
-    cidr_blocks = [
-      "0.0.0.0/0",
-    ]
-  }
-
-  ingress {
-    description = "Prometheus"
-    from_port   = var.prometheus_port
-    to_port     = var.prometheus_port
-    protocol    = "tcp"
-
-    cidr_blocks = [
-      "0.0.0.0/0",
-    ]
-  }
-
   egress {
     from_port = 0
     to_port   = 0
