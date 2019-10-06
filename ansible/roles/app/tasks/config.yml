@@ -93,3 +93,12 @@
     owner: root
     group: root
     mode: 0755
+
+- name: Set Logz.io token environment variable
+  become: true
+  lineinfile:
+    path: /etc/environment
+    line: "LOGZIO_TOKEN={{ logzio_token }}"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
