@@ -78,19 +78,14 @@ variable "https_port" {
   default     = 443
 }
 
-variable "prometheus_port" {
-  description = "The port for handling Prometheus server requests"
-  default     = 9090
-}
-
-variable "grafana_port" {
-  description = "The port for handling Grafana server requests"
-  default     = 3000
-}
-
-variable "user" {
+variable "username" {
   description = "AMI user"
   default     = "ubuntu"
+}
+
+variable "timeout" {
+  description = "The maximum amount of time allowed to deploy EC2 instance"
+  default     = "60m"
 }
 
 variable "domain" {

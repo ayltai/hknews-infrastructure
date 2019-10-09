@@ -64,7 +64,7 @@ jobs:
           name: Apply the changes
           command: terraform apply main
           working_directory: terraform
-          no_output_timeout: 40m
+          no_output_timeout: 60m
 
 workflows:
   version: 2
