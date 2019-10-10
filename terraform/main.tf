@@ -9,6 +9,10 @@ provider "aws" {
   version    = "~> 2.26"
 }
 
+provider "null" {
+  version = "~> 2.1"
+}
+
 output "public_ip" {
   value = aws_eip.hknews.public_ip
 }
