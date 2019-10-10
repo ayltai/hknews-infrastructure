@@ -30,10 +30,10 @@ Follow the [official documentation](https://docs.ansible.com/ansible/latest/inst
 ### SSH key pairs
 You will need a key pair for connecting the newly provisioned instance using SSH. Currently [Terraform](https://www.terraform.io/) [does not support](https://www.terraform.io/docs/providers/aws/r/key_pair.html) creating key pairs so you have to supply your own.
 
-1. Follow [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) to create your key pairs
-2. Save your private key to `./ssh/hknews.pem` (or as specified in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf))
-3. Save your public key to `./ssh/hknews.pub` (or as specified in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf))
-4. Change the variables defined in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf) and [playbook.yml](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/playbook.yml) to fit your needs.
+1. Follow [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) to create your key pair
+2. Save your private key to `~/.ssh/hknews.pem` (or as specified in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf))
+3. Save your public key to `~/.ssh/hknews.pub` (or as specified in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf))
+4. Change the variables defined in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf) and [playbook.yml](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/playbook.yml) to fit your needs
 
 ### Ansible Vault password
 The SSH certificate password is encrypted by [Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html). You will need to specify a Vault password file in order to decrypt the password during the Ansible automation process. The file path is defined in [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt/vars/main.yml).
