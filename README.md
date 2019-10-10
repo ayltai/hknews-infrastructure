@@ -10,7 +10,7 @@ Automates HK News server provisioning and configurations. Made with ❤
 
 ## Features
 * Use [Terraform](https://www.terraform.io/) to provision [AWS](https://aws.amazon.com/) [EC2](https://aws.amazon.com/ec2/) instances
-* Use [Ansible](https://www.ansible.com/) to setup application server, database, SSL certificate and server monitoring tools
+* Use [Ansible](https://www.ansible.com/) to setup application server, database, SSL certificate and system monitoring tools
 
 ## Prerequisites
 You will need [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansible.com/) to run the scripts in this repository.
@@ -28,7 +28,7 @@ Follow the [official documentation](https://learn.hashicorp.com/terraform/gettin
 Follow the [official documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) to install [Ansible](https://www.ansible.com/).
 
 ### SSH key pairs
-You will need key pairs for connecting the newly provisioned system using SSH. Currently [Terraform](https://www.terraform.io/) [does not support](https://www.terraform.io/docs/providers/aws/r/key_pair.html) creating key pairs so you have to supply your own.
+You will need a key pair for connecting the newly provisioned instance using SSH. Currently [Terraform](https://www.terraform.io/) [does not support](https://www.terraform.io/docs/providers/aws/r/key_pair.html) creating key pairs so you have to supply your own.
 
 1. Follow [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) to create your key pairs
 2. Save your private key to `./ssh/hknews.pem` (or as specified in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf))
@@ -36,12 +36,12 @@ You will need key pairs for connecting the newly provisioned system using SSH. C
 4. Change the variables defined in [variables.tf](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform/variables.tf) and [playbook.yml](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/playbook.yml) to fit your needs.
 
 ### Ansible Vault password
-The SSH certificate password is encrypted by [Ansible Vault](). You will need to specify a Vault password file in order to decrypt the password during the Ansible automation process. The file path is defined in [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt/vars/main.yml).
+The SSH certificate password is encrypted by [Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html). You will need to specify a Vault password file in order to decrypt the password during the Ansible automation process. The file path is defined in [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt/vars/main.yml).
 
 ### DNS
 We prefer to use an external DNS provider instead of [AWS Route53](https://aws.amazon.com/route53/) to manage the server public domain.
 
-The Elastic public IPv4 address of the EC2 instance created will be printed out in your console during the Terraform automation process. You are expected to configure your DNS provider to resolve the domain name to this IP address. [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt) will wait for at most 30 minutes for this.
+The Elastic public IPv4 address of the EC2 instance created will be printed out in your console during the Terraform automation process. You are expected to configure your DNS to resolve the domain name to this IP address. [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt) will wait for at most 30 minutes for this.
 
 ## Post installation
 Since we are associating an Elastic IP to an EC2 instance, the Elastic IP must be created **after** the EC2 instance. The Ansible playbook will be executed against a temporary public IP and when it finishes, you are expected to configure your DNS provider to resolve the domain name to the Elastic IP, which will be displayed at the very end of the whole process.
