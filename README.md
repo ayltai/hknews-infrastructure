@@ -15,17 +15,30 @@ Automates HK News server provisioning and configurations. Made with ❤
 ## Prerequisites
 You will need [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansible.com/) to run the scripts in this repository.
 
-### AWS permissions
-You will need the following policies attached to the AWS user account used to run the scripts:
-* AmazonEC2FullAccess
-* AmazonVPCFullAccess
-* CloudWatchActionsEC2Access
-
 ### Installing Terraform
 Follow the [official documentation](https://learn.hashicorp.com/terraform/getting-started/install.html) to install [Terraform](https://www.terraform.io/).
 
 ### Installing Ansible
 Follow the [official documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) to install [Ansible](https://www.ansible.com/).
+
+### AWS permissions
+You will need the following policies attached to the AWS user account used to run the scripts:
+
+* AmazonEC2FullAccess
+* AmazonVPCFullAccess
+* CloudWatchActionsEC2Access
+
+### AWS Access Key and Secret Key
+You will need AWS Access Key and Secret Key to manage resources of your AWS account.
+
+1. Create an IAM group with the required permissions described above
+2. Create an IAM user for programmatic access
+3. Follow the [instruction](https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/) to get your Access Key and Secret Key
+4. Export the keys as environment variables:
+   ```sh
+   export TF_VAR_access_key=abc123
+   export TF_VAR_secret_key=xyz789
+   ```
 
 ### SSH key pairs
 You will need a key pair for connecting the newly provisioned instance using SSH. Currently [Terraform](https://www.terraform.io/) [does not support](https://www.terraform.io/docs/providers/aws/r/key_pair.html) creating key pairs so you have to supply your own.
@@ -42,9 +55,6 @@ The SSH certificate password is encrypted by [Ansible Vault](https://docs.ansibl
 We prefer to use an external DNS provider instead of [AWS Route53](https://aws.amazon.com/route53/) to manage the server public domain.
 
 The Elastic public IPv4 address of the EC2 instance created will be printed out in your console during the Terraform automation process. You are expected to configure your DNS to resolve the domain name to this IP address. [Let's Encrypt role](https://github.com/ayltai/hknews-infrastructure/tree/master/ansible/letsencrypt) will wait for at most 30 minutes for this.
-
-## Post installation
-Since we are associating an Elastic IP to an EC2 instance, the Elastic IP must be created **after** the EC2 instance. The Ansible playbook will be executed against a temporary public IP and when it finishes, you are expected to configure your DNS provider to resolve the domain name to the Elastic IP, which will be displayed at the very end of the whole process.
 
 ## Provisioning
 1. Go to [terraform](https://github.com/ayltai/hknews-infrastructure/tree/master/terraform) directory

@@ -13,7 +13,7 @@ resource "aws_eip" "hknews" {
   vpc      = true
 
   depends_on = [
-    "aws_internet_gateway.hknews"
+    aws_internet_gateway.hknews,
   ]
 
   tags = {
