@@ -29,7 +29,7 @@
   become: true
   copy:
     src: update.sh
-    dest: /root/update.sh
+    dest: "{{ user_home_path }}/update.sh"
     owner: root
     group: root
     mode: 0755
@@ -38,7 +38,7 @@
   become: true
   copy:
     src: start.sh
-    dest: /root/start.sh
+    dest: "{{ user_home_path }}/start.sh"
     owner: root
     group: root
     mode: 0755
@@ -47,7 +47,7 @@
   become: true
   copy:
     src: stop.sh
-    dest: /root/stop.sh
+    dest: "{{ user_home_path }}/stop.sh"
     owner: root
     group: root
     mode: 0755

@@ -1,0 +1,16 @@
+---
+- name: Add a cron job to run services on system reboot
+  become: true
+  cron:
+    name: services
+    special_time: reboot
+    job: "sleep 15s; {{ user_home_path }}/start.sh"
+
+- name: Schedule auto reboot
+  become: true
+  cron:
+    name: reboot
+    weekday: "5"
+    minute: "5"
+    hour: "5"
+    job: /sbin/shutdown -r
