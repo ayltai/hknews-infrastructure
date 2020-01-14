@@ -81,7 +81,7 @@
   script: download.sh
   args:
     chdir: "{{ project_path }}/build/libs/"
-    creates: "{{ project_path }}/build/libs/hknews-backend-1.0.0.jar"
+    creates: "{{ project_path }}/build/libs/hknews-backend-1.2.3.jar"
   environment:
     CIRCLECI_TOKEN: "{{ circleci_token }}"
 
@@ -93,12 +93,3 @@
     owner: root
     group: root
     mode: 0755
-
-- name: Set Logz.io token environment variable
-  become: true
-  lineinfile:
-    path: /etc/environment
-    line: "LOGZIO_TOKEN={{ logzio_token }}"
-  when:
-    - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_version == '18.04'

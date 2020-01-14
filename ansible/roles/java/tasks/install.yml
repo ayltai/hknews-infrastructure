@@ -1,8 +1,17 @@
 ---
+- name: Add AdoptOpenJDK repository key
+  apt_key:
+    url: https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
+
+- name: Add AdoptOpenJDK repository
+  apt_repository:
+    repo: deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+
 - name: Install JDK
   become: true
   apt:
-    name: openjdk-11-jdk-headless
+    name: adoptopenjdk-11-openj9
+    update_cache: true
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '18.04'

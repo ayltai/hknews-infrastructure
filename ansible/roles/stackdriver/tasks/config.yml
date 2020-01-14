@@ -1,0 +1,22 @@
+---
+- name: Copy Stackdriver credentials
+  become: true
+  copy:
+    src: gcp_stackdriver_credentials.json
+    dest: "{{ gcp_stackdriver_credentials_path }}"
+    decrypt: yes
+    owner: root
+    group: root
+    mode: 0400
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
+- name: Set Stackdriver credentials environment variable
+  become: true
+  lineinfile:
+    path: /etc/environment
+    line: "GOOGLE_APPLICATION_CREDENTIALS={{ gcp_stackdriver_credentials_path }}"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
