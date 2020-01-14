@@ -18,9 +18,9 @@ resource "aws_instance" "hknews" {
 }
 
 resource "null_resource" "exec" {
-  depends_on = [
-    aws_instance.hknews,
-  ]
+  triggers = {
+    aws_eip_id = aws_eip.hknews.id,
+  }
 
   provisioner "remote-exec" {
     inline = [
