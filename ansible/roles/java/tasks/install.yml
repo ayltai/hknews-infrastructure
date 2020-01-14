@@ -1,16 +1,12 @@
 ---
-- name: Add AdoptOpenJDK repository key
-  apt_key:
-    url: https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
-
 - name: Add AdoptOpenJDK repository
   apt_repository:
-    repo: deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+    repo: ppa:rpardini/adoptopenjdk
 
 - name: Install JDK
   become: true
   apt:
-    name: adoptopenjdk-11-openj9
+    name: adoptopenjdk-11-jdk-openj9-installer
     update_cache: true
   when:
     - ansible_distribution == 'Ubuntu'
