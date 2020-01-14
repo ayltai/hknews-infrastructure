@@ -24,7 +24,8 @@ resource "null_resource" "exec" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt update && sudo apt -qq install python -y",
+      "sudo apt update",
+      "sudo apt -qq install python3 -y",
     ]
 
     connection {
