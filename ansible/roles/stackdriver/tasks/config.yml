@@ -1,4 +1,11 @@
 ---
+- name: Ensure path exists for Stackdriver credentials
+  become: true
+  file:
+    path: "{{ gcp_stackdriver_credentials_dir }}"
+    state: directory
+    recurse: yes
+
 - name: Copy Stackdriver credentials
   become: true
   copy:
