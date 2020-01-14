@@ -30,6 +30,9 @@
     - name: instrumental
       include_role:
         name: instrumental
+    - name: stackdriver
+      include_role:
+        name: stackdriver
     - name: app
       include_role:
         name: app

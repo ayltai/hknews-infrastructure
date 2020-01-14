@@ -4,7 +4,6 @@
   copy:
     src: gcp_stackdriver_credentials.json
     dest: "{{ gcp_stackdriver_credentials_path }}"
-    decrypt: yes
     owner: root
     group: root
     mode: 0400
