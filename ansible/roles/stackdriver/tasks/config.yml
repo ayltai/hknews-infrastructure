@@ -18,6 +18,15 @@
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '18.04'
 
+- name: Set GCP Project ID environment variable
+  become: true
+  lineinfile:
+    path: /etc/environment
+    line: "GOOGLE_CLOUD_PROJECT={{ gcp_project_id }}"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '18.04'
+
 - name: Set Stackdriver credentials environment variable
   become: true
   lineinfile:
