@@ -1,4 +1,0 @@
----
-gcp_project_id: hknews-dev
-gcp_stackdriver_credentials_dir: /etc/google/auth
-gcp_stackdriver_credentials_path: /etc/google/auth/gcp_stackdriver_credentials.json
