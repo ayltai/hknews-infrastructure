@@ -5,3 +5,13 @@
     name: hknews
     special_time: reboot
     job: "sleep 1m; {{ project_path }}/start.sh"
+
+- name: Periodically renew SSL certificate
+  become: true
+  cron:
+    name: renew
+    minute: "5"
+    hour: "5"
+    day: "1/14"
+    weekday: "?"
+    job: "{{ user_home_path }}/renew.sh"

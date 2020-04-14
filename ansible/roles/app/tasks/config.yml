@@ -81,7 +81,7 @@
   script: download.sh
   args:
     chdir: "{{ project_path }}/build/libs/"
-    creates: "{{ project_path }}/build/libs/hknews-backend-1.2.3.jar"
+    creates: "{{ project_path }}/build/libs/hknews-backend-1.2.2.jar"
   environment:
     CIRCLECI_TOKEN: "{{ circleci_token }}"
 
@@ -93,6 +93,44 @@
     owner: root
     group: root
     mode: 0755
+
+- name: Copy script to renew SSL certificate
+  become: true
+  template:
+    src: renew.sh
+    dest: "{{ user_home_path }}/renew.sh.j2"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Copy CA certificates
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: "{{ user_home_path }}"
+    owner: root
+    group: root
+    mode: 0600
+  with_items:
+    - /files/root_ca_1_pem.crt
+    - /files/root_ca_2_pem.crt
+    - /files/root_ca_3_pem.crt
+
+- name: Import CA certificates to keystore
+  become: true
+  command: |
+    keytool \
+    -import \
+    -trustcacerts \
+    -keystore /usr/lib/jvm/adoptopenjdk-11-jdk-openj9/lib/security/cacerts \
+    -storepass changeit \
+    -alias root_ca_{{ item.0 }} \
+    -file {{ item.1 }} \
+    -noprompt
+  with_indexed_items:
+    - "{{ user_home_path }}/root_ca_1_pem.crt"
+    - "{{ user_home_path }}/root_ca_2_pem.crt"
+    - "{{ user_home_path }}/root_ca_3_pem.crt"
 
 - name: Set Logz.io token environment variable
   become: true

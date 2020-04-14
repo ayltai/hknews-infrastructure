@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cp /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem {{ project_path }}/keystore.pem
+cp /etc/letsencrypt/live/{{ domain_name }}/privkey.pem {{ project_path }}/private.key
+
+openssl pkcs12 -export -in /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem -inkey /etc/letsencrypt/live/{{ domain_name }}/privkey.pem -password pass:{{ ssl_key }} -out {{ project_path }}/keystore.p12 -name keystore
+cp {{ project_path }}/keystore.p12 {{ project_path }}/src/main/resources/keystore.p12
+
+keytool -importkeystore -deststorepass {{ ssl_key }} -destkeypass {{ ssl_key }} -destkeystore {{ project_path }}/keystore.jks -srckeystore {{ project_path }}/keystore.p12 -srcstoretype PKCS12 -srcstorepass {{ ssl_key }} -alias keystore
+cp {{ project_path }}/keystore.jks {{ project_path }}/src/main/resources/keystore.jks
