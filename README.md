@@ -1,3 +1,6 @@
+## Warning
+This repository is deprecated. Please check out [hknews](https://github.com/ayltai/hknews).
+
 # HK News Infrastructure
 
 [![CircleCI](https://img.shields.io/circleci/project/github/ayltai/hknews-infrastructure/master.svg?style=flat)](https://circleci.com/gh/ayltai/hknews-infrastructure)
